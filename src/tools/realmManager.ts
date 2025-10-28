@@ -63,12 +63,18 @@ export class RealmManager {
   }
 
   // 通用查询方法
-  query<T>(modelClass: string, filter?: string) {
+  query<T>(modelClass: string, filter?: string): T[] {
     const realm = this.getRealmInstance();
+    let results;
+    
     if (filter) {
-      return realm.objects<T>(modelClass).filtered(filter);
+      results = realm.objects<T>(modelClass).filtered(filter);
+    } else {
+      results = realm.objects<T>(modelClass);
     }
-    return realm.objects<T>(modelClass);
+    
+    // 将Realm Results转换为普通数组
+    return Array.from(results);
   }
 
   // 根据主键查询单个对象
@@ -90,7 +96,7 @@ export class RealmManager {
   }
 
   // 批量插入对象
-  createMultiple<T>(modelClass: any, dataArray: any[]): T[] {
+  createMultiple<T>(modelClass: any, dataArray: any[]): number {
     const realm = this.getRealmInstance();
     const createdObjects: T[] = [];
     
@@ -100,11 +106,11 @@ export class RealmManager {
       }
     });
     
-    return createdObjects;
+    return createdObjects.length;
   }
 
   // 更新对象
-  update<T>(modelClass: any, primaryKey: any, updateData: Partial<T>): T | null {
+  update<T>(modelClass: any, primaryKey: any, updateData: Partial<T>): boolean {
     const realm = this.getRealmInstance();
     let updatedObject: T | null = null;
     
@@ -116,7 +122,7 @@ export class RealmManager {
       }
     });
     
-    return updatedObject;
+    return updatedObject !== null;
   }
 
   // 删除对象
@@ -211,15 +217,3 @@ export class RealmManager {
 
 // 导出单例实例
 export default RealmManager.getInstance();
-
-// 导出所有模型类，方便在其他地方使用
-export {
-  Book,
-  Bookmark,
-  BookSituation,
-  Chapter,
-  Note,
-  ParagraphComment,
-  Tag,
-  UserSettings
-};
