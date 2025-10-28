@@ -9,12 +9,41 @@
     "start": "react-native start",
     "test": "jest"
   },
+  "codegenConfig": {
+    "name": "NativeFileEncodingSpec",
+    "type": "modules",
+    "jsSrcsDir": "specs",
+    "android": {
+      "javaPackageName": "com.nativefileencoding"
+    }
+  },
   "dependencies": {
+    "@react-native-documents/picker": "^10.1.2",
+    "@react-native-vector-icons/common": "^11.0.0",
+    "@react-native-vector-icons/ionicons": "^7.4.0",
+    "@react-native-vector-icons/material-icons": "^0.0.1",
+    "@react-navigation/bottom-tabs": "^7.3.10",
+    "@react-navigation/elements": "^2.3.8",
+    "@react-navigation/native": "^7.1.6",
+    "@react-navigation/native-stack": "^7.3.10",
+    "@realm/react": "^0.20.0",
+    "nativewind": "^4.1.23",
     "react": "19.0.0",
-    "react-native": "0.79.0"
+    "react-native": "0.79.0",
+    "react-native-fs": "^2.20.0",
+    "react-native-linear-gradient": "^2.8.3",
+    "react-native-reanimated": "^3.17.3",
+    "react-native-safe-area-context": "^5.3.0",
+    "react-native-screens": "^4.10.0",
+    "react-native-svg": "^15.12.0",
+    "react-native-swiper": "^1.6.0",
+    "realm": "^20.2.0",
+    "tailwindcss": "^3.4.17",
+    "zustand": "^5.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@babel/plugin-syntax-top-level-await": "^7.14.5",
     "@babel/preset-env": "^7.25.3",
     "@babel/runtime": "^7.25.0",
     "@react-native-community/cli": "18.0.0",

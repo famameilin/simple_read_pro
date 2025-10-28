@@ -92,6 +92,14 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+                    if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                        storeFile file(MYAPP_RELEASE_STORE_FILE)
+                        storePassword MYAPP_RELEASE_STORE_PASSWORD
+                        keyAlias MYAPP_RELEASE_KEY_ALIAS
+                        keyPassword MYAPP_RELEASE_KEY_PASSWORD
+                    }
+                }
     }
     buildTypes {
         debug {
@@ -103,6 +111,7 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -110,7 +119,7 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
-
+    implementation 'com.github.albfernandez:juniversalchardet:2.4.0'
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {
