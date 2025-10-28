@@ -73,8 +73,8 @@ export class RealmManager {
       results = realm.objects<T>(modelClass);
     }
     
-    // 将Realm Results转换为普通数组
-    return Array.from(results);
+    // 将Realm Results转换为普通数组，并将每个Realm对象转换为普通JavaScript对象
+    return Array.from(results).map(item => JSON.parse(JSON.stringify(item)));
   }
 
   // 根据主键查询单个对象
