@@ -63,18 +63,12 @@ export class RealmManager {
   }
 
   // 通用查询方法
-  query<T>(modelClass: string, filter?: string): T[] {
+  query<T>(modelClass: string, filter?: string) {
     const realm = this.getRealmInstance();
-    let results;
-    
     if (filter) {
-      results = realm.objects<T>(modelClass).filtered(filter);
-    } else {
-      results = realm.objects<T>(modelClass);
+      return realm.objects<T>(modelClass).filtered(filter);
     }
-    
-    // 将Realm Results转换为普通数组，并将每个Realm对象转换为普通JavaScript对象
-    return Array.from(results).map(item => JSON.parse(JSON.stringify(item)));
+    return realm.objects<T>(modelClass);
   }
 
   // 根据主键查询单个对象
@@ -92,7 +86,8 @@ export class RealmManager {
       createdObject = realm.create<T>(modelClass, data);
     });
     
-    return createdObject!;
+    // 将Realm对象转换为普通JavaScript对象
+    return JSON.parse(JSON.stringify(createdObject));
   }
 
   // 批量插入对象
