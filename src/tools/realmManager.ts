@@ -80,14 +80,14 @@ export class RealmManager {
   // 插入单个对象
   create<T>(modelClass: any, data: any): boolean {
     const realm = this.getRealmInstance();
-    let createdObject: T;
+    let success = false;
     
     realm.write(() => {
-      createdObject = realm.create<T>(modelClass, data);
+      const createdObject = realm.create<T>(modelClass, data);
+      success = createdObject !== null && createdObject !== undefined;
     });
     
-    // 返回操作是否成功
-    return createdObject !== null && createdObject !== undefined;
+    return success;
   }
 
   // 批量插入对象
