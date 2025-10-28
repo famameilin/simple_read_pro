@@ -39,7 +39,7 @@ local.properties
 #
 node_modules/
 npm-debug.log
-yarn-error.log
+package-lock.json
 
 # fastlane
 #
@@ -65,11 +65,3 @@ yarn-error.log
 
 # testing
 /coverage
-
-# Yarn
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
