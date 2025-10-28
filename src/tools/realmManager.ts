@@ -78,7 +78,7 @@ export class RealmManager {
   }
 
   // 插入单个对象
-  create<T>(modelClass: any, data: any): T {
+  create<T>(modelClass: any, data: any): boolean {
     const realm = this.getRealmInstance();
     let createdObject: T;
     
@@ -86,8 +86,8 @@ export class RealmManager {
       createdObject = realm.create<T>(modelClass, data);
     });
     
-    // 将Realm对象转换为普通JavaScript对象
-    return JSON.parse(JSON.stringify(createdObject));
+    // 返回操作是否成功
+    return createdObject !== null && createdObject !== undefined;
   }
 
   // 批量插入对象
